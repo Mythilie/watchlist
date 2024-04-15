@@ -1,8 +1,10 @@
 import "./App.css";
 import UserLogin from "./Components/UserLogin";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import MainContainer  from "./Components/MainContainer";
+import MainContainer from "./Components/MainContainer";
 import ListContainer from "./Components/ListContainer";
+import { Provider } from "react-redux";
+import store from "./Util/store";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -24,7 +26,9 @@ function App() {
 
   return (
     <div>
-      <RouterProvider router={appRouter} />
+      <Provider store={store}>
+        <RouterProvider router={appRouter} />
+      </Provider>
     </div>
   );
 }
