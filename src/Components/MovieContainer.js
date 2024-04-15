@@ -6,22 +6,22 @@ import Shimmer from "./Shimmer";
 
 const MovieContainer = () => {
   const [searchText, setSearchText] = useState("");
-  const [filteredVideos, setFilteredVideos] = useState([]);
-  const [videos, setVideos] = useState([]);
+  const [filteredMovie, setFilteredMovie] = useState([]);
+  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    getVideos();
+    getMovies();
   }, []);
 
 
-  const getVideos = async () => {
+  const getMovies = async () => {
     const data = await fetch(MOVIE_API);
     const json = await data.json();
-    setVideos(json?.Search);
-    setFilteredVideos(json?.Search);
+    setMovies(json?.Search);
+    setFilteredMovie(json?.Search);
   };
 
-  if (!videos) return null;
+  if (!movies) return null;
   // if (filteredVideos?.length === 0)
   //   return (
   //     <div className="flex justify-center items-center relative top-40 font-bold text-2xl text-red-500">
@@ -30,7 +30,7 @@ const MovieContainer = () => {
   //   );
 
 
-  return videos?.length === 0 ? (
+  return movies?.length === 0 ? (
     <Shimmer />
   ) : (
     <div>
@@ -46,16 +46,16 @@ const MovieContainer = () => {
         <button
           className="border border-gray-400 p-1 rounded-r bg-red-600 text-white"
           onClick={() => {
-            const data = filterData(searchText, videos);
-            setFilteredVideos(data);
+            const data = filterData(searchText, movies);
+            setFilteredMovie(data);
           }}
         >
           Search
         </button>
       </div>
       <div className="flex flex-wrap gap-x-8 mb-10">
-        {filteredVideos.map((video, index) => (
-          <MovieCard key={index} info={video} />
+        {filteredMovie.map((movie, index) => (
+          <MovieCard key={index} info={movie} />
         ))}
       </div>
     </div>

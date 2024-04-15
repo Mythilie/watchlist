@@ -1,21 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const listSlice = createSlice({
-    name: "list",
-    initialState: {
-        items: [],
+  name: "list",
+  initialState: {
+    items: [],
+  },
+  reducers: {
+    addMovie: (state, action) => {
+      state.items.push(action.payload);
     },
-    reducers: {
-        addMovie: (state, action) => {
-            state.items.push(action.payload);
-        },
-        removeMovie: (state, action) => {
-            state.items.pop();
-        },
-        // clearList: (state) => {
-        //     state.items = [];
-        // },
+    removeMovie: (state, action) => {
+      const indexToRemove = action.payload;
+      state.items.splice(indexToRemove, 1);
     },
+  },
 });
 
 export const { addMovie, removeMovie } = listSlice.actions;
