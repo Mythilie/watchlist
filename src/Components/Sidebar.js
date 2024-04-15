@@ -61,8 +61,8 @@ const Sidebar = ({ user }) => {
       
       <div className="flex py-2 fixed bottom-0">
         <CircleUser className="w-8 h-8 text-red-500 " />
-        <div className="overflow-hidden whitespace-nowrap">
-        <h1 className="ml-2 mt-1 font-medium truncate">{user}</h1>
+        <div className="overflow-hidden whitespace-nowrap w-[11rem] h-[2.7rem] cursor-pointer">
+        <h1 title={user} className="ml-2 mt-1 font-medium truncate">{user}</h1>
         </div>
         
       </div>

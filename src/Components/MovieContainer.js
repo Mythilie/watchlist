@@ -54,8 +54,8 @@ const MovieContainer = () => {
         </button>
       </div>
       <div className="flex flex-wrap gap-x-8 mb-10">
-        {filteredVideos.map((video) => (
-          <MovieCard info={video} />
+        {filteredVideos.map((video, index) => (
+          <MovieCard key={index} info={video} />
         ))}
       </div>
     </div>

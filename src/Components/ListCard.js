@@ -1,20 +1,17 @@
-import React, { useState } from "react";
-import { BookmarkPlus } from "lucide-react";
-import { addMovie } from "../Util/listSlice";
+import React from "react";
+import { BookmarkX } from "lucide-react";
 import { useDispatch } from "react-redux";
+import { removeMovie } from "../Util/listSlice";
 
 
-const MovieCard = ({ info }) => {
+const ListCard = ({ info }) => {
   const { Title, Year, Poster } = info;
-  const [isListAdd, setIsListAdd] = useState(false);
- 
+
   const dispatch = useDispatch();
 
-  const addMovieList = (info) => {
-    dispatch(addMovie(info));
-    setIsListAdd(true);
+  const removeMovieList = (info) => {
+    dispatch(removeMovie(info));
   }
-  
   return (
     <div className="shadow-xl shadow-gray-250 w-40 mt-6 ">
       <img className="rounded-lg h-50" alt="poster" src={Poster} />
@@ -23,10 +20,12 @@ const MovieCard = ({ info }) => {
           <li className="font-bold h-8 truncate cursor-pointer" title={Title}>{Title}</li>
           <li>{Year}</li>
         </ul>
-          <button onClick={() => addMovieList(info)}><BookmarkPlus className={`mt-8 mr-2 mb-2 ${isListAdd ? "text-[#1F9B04]" : ''}`}/></button>
+          <button onClick={() => {
+            removeMovieList(info);
+          }}><BookmarkX className="mt-8 mr-2 mb-2"/></button>
       </div>
     </div>
   );
 };
 
-export default MovieCard;
+export default ListCard;
