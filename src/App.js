@@ -3,8 +3,8 @@ import UserLogin from "./Components/UserLogin";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MainContainer from "./Components/MainContainer";
 import ListContainer from "./Components/ListContainer";
-import { Provider } from "react-redux";
 import store from "./Util/store";
+import { Provider } from "react-redux";
 import MovieDetails from "./Components/MovieDetails";
 
 function App() {

@@ -3,16 +3,18 @@ import { BookmarkPlus } from "lucide-react";
 import { addMovie } from "../Util/listSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { setSavedMovie } from "../Util/helper";
 
 const MovieCard = ({ info }) => {
   const { Title, Year, Poster, imdbID } = info;
   const [isListAdd, setIsListAdd] = useState(false);
+  const user = localStorage.getItem("loggedIn-User");
 
   const dispatch = useDispatch();
-
   const addMovieList = (info) => {
     dispatch(addMovie(info));
     setIsListAdd(true);
+    setSavedMovie(user, info);
   };
 
   return (
@@ -21,8 +23,13 @@ const MovieCard = ({ info }) => {
       <div className="flex">
         <ul className="w-[8rem]">
           <li className="font-bold h-8 truncate cursor-pointer" title={Title}>
-          <Link to={"/movieDetails?v="  + imdbID} className="flex gap-2  
-          hover:text-blue-700 hover:underline">{Title}</Link>
+            <Link
+              to={"/movieDetails?v=" + imdbID}
+              className="flex gap-2  
+          hover:text-blue-700 hover:underline"
+            >
+              {Title}
+            </Link>
           </li>
           <li>{Year}</li>
         </ul>

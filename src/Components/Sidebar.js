@@ -6,9 +6,6 @@ import { useSelector } from "react-redux";
 const Sidebar = ({ user }) => {
   const movieList = useSelector((store) => store.list.items);
 
-  const movieString = JSON.stringify(movieList);
-  localStorage.setItem("movieString", movieString);
-
   const location = useLocation();
   return (
     <div className="p-5 shadow-xl shadow-gray-250 col-span-0 h-screen ">

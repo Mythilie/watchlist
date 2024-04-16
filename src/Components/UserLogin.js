@@ -1,29 +1,42 @@
 import React, { useState } from "react";
 import Head from "./Head";
 import Body from "./Body";
+import { getSavedMovie } from "../Util/helper";
+import { addMovies } from "../Util/listSlice";
+import { useDispatch } from "react-redux";
 
 const UserLogin = () => {
   const [userEmail, setUserEmail] = useState("");
   const [showMessage, setshowMessage] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  const localSignUp = localStorage.getItem("email");
-  // const [movie, setMovie] = useState({});
+  const dispatch = useDispatch();
   const DoSignIn = () => {
-    {
-      localSignUp === userEmail
-        ? setIsLogin(true)
-        : setshowMessage("User not created yet! Do, Sign Up.");
+    let allAccounts = { users: [] };
+    if (JSON.parse(localStorage.getItem("allAccounts"))) {
+      allAccounts = JSON.parse(localStorage.getItem("allAccounts"));
     }
-    //   const movieData = localStorage.getItem("movieString");
-    //   if (movieData) {
-    //     setMovie(JSON.parse(movieData));
-    // }
-    //   console.log(localStorage.getItem("movieString"));
+    const isAvailable = allAccounts.users.filter(
+      (user) => user.email === userEmail
+    );
+    isAvailable[0]
+      ? setIsLogin(true)
+      : setshowMessage("User not created yet! Do, Sign Up.");
+    localStorage.setItem("loggedIn-User", userEmail);
+    const movies = getSavedMovie(userEmail);
+    console.log(movies);
+    dispatch(addMovies(movies.savedMovies));
   };
 
   const DoSignUp = () => {
     if (userEmail) {
       localStorage.setItem("email", userEmail);
+      let allAccounts = { users: [] };
+      if (JSON.parse(localStorage.getItem("allAccounts"))) {
+        allAccounts = JSON.parse(localStorage.getItem("allAccounts"));
+      }
+      let newUser = { email: userEmail, savedMovies: [] };
+      allAccounts.users = [...allAccounts.users, newUser];
+      localStorage.setItem("allAccounts", JSON.stringify(allAccounts));
       setshowMessage("User Created Successfully.");
     }
   };
