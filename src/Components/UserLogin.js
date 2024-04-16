@@ -2,29 +2,31 @@ import React, { useState } from "react";
 import Head from "./Head";
 import Body from "./Body";
 
-
-
 const UserLogin = () => {
-
-  
   const [userEmail, setUserEmail] = useState("");
-  const [signUp, setSignUp] = useState(userEmail);
+  const [showMessage, setshowMessage] = useState("");
   const [isLogin, setIsLogin] = useState(false);
-  const [isAuth, setIsAuth] = useState();
-
-  
+  const localSignUp = localStorage.getItem("email");
+  // const [movie, setMovie] = useState({});
   const DoSignIn = () => {
-    
     {
-      userEmail !== '' && userEmail === signUp ? setIsLogin(true) : setIsLogin(false);
-      setIsAuth(true);
+      localSignUp === userEmail
+        ? setIsLogin(true)
+        : setshowMessage("User not created yet! Do, Sign Up.");
     }
+    //   const movieData = localStorage.getItem("movieString");
+    //   if (movieData) {
+    //     setMovie(JSON.parse(movieData));
+    // }
+    //   console.log(localStorage.getItem("movieString"));
   };
 
   const DoSignUp = () => {
-    setSignUp(userEmail);
-    {userEmail  === '' ? setIsAuth(false) : setIsAuth(true)}
-  }
+    if (userEmail) {
+      localStorage.setItem("email", userEmail);
+      setshowMessage("User Created Successfully.");
+    }
+  };
 
   return (
     <div className="h-screen w-screen overflow-hidden">
@@ -52,22 +54,9 @@ const UserLogin = () => {
                 }}
                 placeholder="Email address"
               />
-              {isAuth && signUp === '' ? (
-                <h1 className="text-white -mt-6 -mb-4">
-                  User not created yet! Do, Sign Up.
-                </h1>
-              ) : (
-               ''
-              )}
-              {isAuth && signUp !== ''  ? (
-                <h1 className="text-white -mt-6 -mb-4">
-                  User created successfully.
-                </h1>
-              ) : (
-               ''
-              )}
+              <h1 className="text-white -mt-6 -mb-4">{showMessage}</h1>
               <div>
-              <button
+                <button
                   onClick={() => {
                     DoSignIn();
                   }}
@@ -75,9 +64,12 @@ const UserLogin = () => {
                 >
                   Sign In
                 </button>
-                <button onClick={() => {
-                  DoSignUp();
-                }} className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                  onClick={() => {
+                    DoSignUp();
+                  }}
+                  className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                >
                   Sign Up
                 </button>
               </div>
@@ -85,13 +77,12 @@ const UserLogin = () => {
           </div>
         </div>
       )}
-      {isLogin && 
-      <>
-      <Head />
-      <Body user={userEmail}/>
-      </>
-      }
-      
+      {isLogin && (
+        <>
+          <Head />
+          <Body user={userEmail} />
+        </>
+      )}
     </div>
   );
 };

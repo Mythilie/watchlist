@@ -5,6 +5,7 @@ import MainContainer from "./Components/MainContainer";
 import ListContainer from "./Components/ListContainer";
 import { Provider } from "react-redux";
 import store from "./Util/store";
+import MovieDetails from "./Components/MovieDetails";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -19,6 +20,10 @@ function App() {
         {
           path: "/List",
           element: <ListContainer />,
+        },
+        {
+          path: "/MovieDetails",
+          element: <MovieDetails />,
         },
       ],
     },

@@ -13,7 +13,6 @@ const MovieContainer = () => {
     getMovies();
   }, []);
 
-
   const getMovies = async () => {
     const data = await fetch(MOVIE_API);
     const json = await data.json();
@@ -28,7 +27,6 @@ const MovieContainer = () => {
   //       <h1>No Movies Match Found.</h1>
   //     </div>
   //   );
-
 
   return movies?.length === 0 ? (
     <Shimmer />

@@ -3,26 +3,31 @@ import { BookmarkX } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { removeMovie } from "../Util/listSlice";
 
-
-const ListCard = ({index, info }) => {
+const ListCard = ({ index, info }) => {
   const { Title, Year, Poster } = info;
 
   const dispatch = useDispatch();
 
   const removeMovieList = (index) => {
     dispatch(removeMovie(index));
-  }
+  };
   return (
     <div className="shadow-xl shadow-gray-250 w-40 mt-6 ">
       <img className="rounded-lg h-50" alt="poster" src={Poster} />
       <div className="flex">
         <ul className="w-[8rem]">
-          <li className="font-bold h-8 truncate cursor-pointer" title={Title}>{Title}</li>
+          <li className="font-bold h-8 truncate cursor-pointer" title={Title}>
+            {Title}
+          </li>
           <li>{Year}</li>
         </ul>
-          <button onClick={() => {
+        <button
+          onClick={() => {
             removeMovieList(index);
-          }}><BookmarkX className="mt-8 mr-2 mb-2"/></button>
+          }}
+        >
+          <BookmarkX className="mt-8 mr-2 mb-2" />
+        </button>
       </div>
     </div>
   );
