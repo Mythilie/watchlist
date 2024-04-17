@@ -22,15 +22,17 @@ const UserLogin = () => {
       (user) => user.email === userEmail
     );
     navigate("/Home");
-    isAvailable[0] ? setIsLogin(true) : (() => {
-      if (!userEmail.trim()) {
-        setshowMessage("User should not be empty.");
-      } else {
-        setshowMessage("User not created yet! Do, Sign Up.");
-        setUserEmail("");
-      }
-    })();
-     
+    isAvailable[0]
+      ? setIsLogin(true)
+      : (() => {
+          if (!userEmail.trim()) {
+            setshowMessage("User should not be empty.");
+          } else {
+            setshowMessage("User not created yet! Do, Sign Up.");
+            setUserEmail("");
+          }
+        })();
+
     localStorage.setItem("loggedIn-User", userEmail);
     const movies = getSavedMovie(userEmail);
     dispatch(addMovies(movies?.savedMovies || []));
@@ -49,6 +51,8 @@ const UserLogin = () => {
       );
       if (userExists) {
         setshowMessage("The user already exists.");
+        setIsLogin(true);
+        navigate("/Home");
       } else {
         setshowMessage("User created successfully.");
       }

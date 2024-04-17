@@ -2,15 +2,17 @@ import React from "react";
 import { BookmarkX } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { removeMovie } from "../Util/listSlice";
+import { modifySavedMovie } from "../Util/helper";
 
-const ListCard = ({ index, info }) => {
-
+const ListCard = ({ info }) => {
   const { Title, Year, Poster } = info;
 
   const dispatch = useDispatch();
+  const user = localStorage.getItem("loggedIn-User");
 
   const removeMovieList = (Title) => {
     dispatch(removeMovie(Title));
+    modifySavedMovie(user, Title);
   };
   return (
     <div className="shadow-xl shadow-gray-250 w-40 mt-6 ">

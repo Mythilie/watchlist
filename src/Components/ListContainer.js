@@ -16,18 +16,17 @@ const ListContainer = () => {
           list.
         </p>
       </div>
-      {movieList.length > 0 ? (
-       <div className="flex flex-wrap gap-x-8 mb-10">
-        {movieList.map((movieList, index) => (
-          <ListCard key={index} index={index} info={movieList} />
-        ))}
-      </div>
+      {movieList?.length > 0 ? (
+        <div className="flex flex-wrap gap-x-8 mb-10">
+          {movieList?.map((movieList, index) => (
+            <ListCard key={index} info={movieList} />
+          ))}
+        </div>
       ) : (
         <div className="flex justify-center items-center relative top-40 font-bold text-2xl text-red-500">
           <h1>No movies in the watchlist.</h1>
         </div>
-      )
-    }
+      )}
     </div>
   );
 };

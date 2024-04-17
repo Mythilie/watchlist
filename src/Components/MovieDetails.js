@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { API_KEY } from "../Util/Constant";
+import { API_KEY } from "../Util/constant";
 
 const MovieDetails = () => {
   const [searchParams] = useSearchParams();

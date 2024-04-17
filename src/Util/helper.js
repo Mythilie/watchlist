@@ -1,7 +1,7 @@
-export const filterData = (searchText, videos) => {
+export const filterData = (searchText, movies) => {
   try {
-    const filterData = videos.filter((video) =>
-      video.Title?.toLowerCase().includes(searchText.toLowerCase())
+    const filterData = movies.filter((movie) =>
+      movie.Title?.toLowerCase().includes(searchText.toLowerCase())
     );
     return filterData;
   } catch (error) {
@@ -12,8 +12,26 @@ export const filterData = (searchText, videos) => {
 export const setSavedMovie = (email, movieDetails) => {
   try {
     let allAccounts = JSON.parse(localStorage.getItem("allAccounts"));
-    allAccounts.users.map((user) => {
+    allAccounts?.users?.map((user) => {
       if (email === user.email) user.savedMovies.push(movieDetails);
+      return user;
+    });
+    localStorage.setItem("allAccounts", JSON.stringify(allAccounts));
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
+export const modifySavedMovie = (email, Title) => {
+  console.log(Title);
+  try {
+    let allAccounts = JSON.parse(localStorage.getItem("allAccounts"));
+    allAccounts?.users?.map((user) => {
+      if (email === user.email) {
+        user.savedMovies = user.savedMovies.filter(
+          (movie) => Title !== movie.Title
+        );
+      }
       return user;
     });
     localStorage.setItem("allAccounts", JSON.stringify(allAccounts));

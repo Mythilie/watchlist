@@ -40,7 +40,7 @@ const Sidebar = ({ user }) => {
       </div>
       <div className="h-[20rem] overflow-y-auto w-[13rem]">
         <div className="container mx-auto mt-2 ml-3 w-[11rem] h-[2.7rem]">
-          {movieList.map((movieList, index) => (
+          {movieList?.map((movieList, index) => (
             <div
               key={index}
               className="mb-2 py-2 border border-gray-200 rounded 

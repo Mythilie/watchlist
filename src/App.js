@@ -27,7 +27,7 @@ function App() {
           path: "/MovieDetails",
           element: (
             <Suspense fallback={<h1>Loading...</h1>}>
-            <MovieDetails />
+              <MovieDetails />
             </Suspense>
           ),
         },

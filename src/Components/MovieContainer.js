@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { MOVIE_API } from "../Util/Constant";
+import { MOVIE_API } from "../Util/constant";
 import MovieCard from "./MovieCard";
-import { filterData } from "../Util/helper";
+import { filterData, getSavedMovie } from "../Util/helper";
 import Shimmer from "./Shimmer";
 
 const MovieContainer = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredMovie, setFilteredMovie] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [isSearchNotFound, setIsSearchNotFound] = useState(false);
+  const user = localStorage.getItem("loggedIn-User");
 
   useEffect(() => {
     getMovies();
@@ -22,16 +24,13 @@ const MovieContainer = () => {
 
   const SearchMovie = () => {
     const data = filterData(searchText, movies);
+    movies?.map((movie) => {
+      if (movie.Title !== searchText) setIsSearchNotFound(true);
+    });
     setFilteredMovie(data);
   };
 
   if (!movies) return null;
-  // if (filteredVideos?.length === 0)
-  //   return (
-  //     <div className="flex justify-center items-center relative top-40 font-bold text-2xl text-red-500">
-  //       <h1>No Movies Match Found.</h1>
-  //     </div>
-  //   );
 
   return movies?.length === 0 ? (
     <Shimmer />
@@ -55,10 +54,19 @@ const MovieContainer = () => {
           Search
         </button>
       </div>
+      {isSearchNotFound && <div className="flex justify-center items-center relative top-40 font-bold text-2xl text-red-500">
+        <h1>No Movies Match Found.</h1>
+      </div>}
       <div className="flex flex-wrap gap-x-8 mb-10">
-        {filteredMovie.map((movie, index) => (
-          <MovieCard key={index} info={movie} />
-        ))}
+        {filteredMovie?.map((movie, index) => {
+          const savedMovies = getSavedMovie(user);
+          const isListAdd =
+            savedMovies?.savedMovies.some(
+              (savedMovie) => savedMovie.Title === movie.Title
+            ) || false;
+          console.log(savedMovies?.savedMovies);
+          return <MovieCard key={index} info={movie} isListAdd={isListAdd} />;
+        })}
       </div>
     </div>
   );
