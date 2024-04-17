@@ -20,6 +20,11 @@ const MovieContainer = () => {
     setFilteredMovie(json?.Search);
   };
 
+  const SearchMovie = () => {
+    const data = filterData(searchText, movies);
+    setFilteredMovie(data);
+  };
+
   if (!movies) return null;
   // if (filteredVideos?.length === 0)
   //   return (
@@ -34,7 +39,7 @@ const MovieContainer = () => {
     <div>
       <div className="mt-6">
         <input
-          className="w-[94.3%] border border-gray-400 p-1 rounded-l"
+          className="w-[94%] border border-gray-400 p-1 rounded-l"
           type="text"
           placeholder="Search Movies"
           onChange={(e) => {
@@ -44,8 +49,7 @@ const MovieContainer = () => {
         <button
           className="border border-gray-400 p-1 rounded-r bg-red-600 text-white"
           onClick={() => {
-            const data = filterData(searchText, movies);
-            setFilteredMovie(data);
+            SearchMovie();
           }}
         >
           Search

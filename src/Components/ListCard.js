@@ -4,12 +4,13 @@ import { useDispatch } from "react-redux";
 import { removeMovie } from "../Util/listSlice";
 
 const ListCard = ({ index, info }) => {
+
   const { Title, Year, Poster } = info;
 
   const dispatch = useDispatch();
 
-  const removeMovieList = (index) => {
-    dispatch(removeMovie(index));
+  const removeMovieList = (Title) => {
+    dispatch(removeMovie(Title));
   };
   return (
     <div className="shadow-xl shadow-gray-250 w-40 mt-6 ">
@@ -23,7 +24,7 @@ const ListCard = ({ index, info }) => {
         </ul>
         <button
           onClick={() => {
-            removeMovieList(index);
+            removeMovieList(Title);
           }}
         >
           <BookmarkX className="mt-8 mr-2 mb-2" />

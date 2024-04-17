@@ -5,7 +5,9 @@ import MainContainer from "./Components/MainContainer";
 import ListContainer from "./Components/ListContainer";
 import store from "./Util/store";
 import { Provider } from "react-redux";
-import MovieDetails from "./Components/MovieDetails";
+import { lazy, Suspense } from "react";
+
+const MovieDetails = lazy(() => import("./Components/MovieDetails"));
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -14,7 +16,7 @@ function App() {
       element: <UserLogin />,
       children: [
         {
-          path: "/",
+          path: "/Home",
           element: <MainContainer />,
         },
         {
@@ -23,7 +25,11 @@ function App() {
         },
         {
           path: "/MovieDetails",
-          element: <MovieDetails />,
+          element: (
+            <Suspense fallback={<h1>Loading...</h1>}>
+            <MovieDetails />
+            </Suspense>
+          ),
         },
       ],
     },

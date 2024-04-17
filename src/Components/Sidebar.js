@@ -1,5 +1,5 @@
 import React from "react";
-import { Home, Search, List, CircleUser } from "lucide-react";
+import { Home, List, CircleUser } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -8,28 +8,18 @@ const Sidebar = ({ user }) => {
 
   const location = useLocation();
   return (
-    <div className="p-5 shadow-xl shadow-gray-250 col-span-0 h-screen ">
+    <div className="p-5 shadow-xl shadow-gray-250 col-span-0 h-screen w-[15rem]">
       <h1 className="text-3xl font-bold text-red-500">WatchList</h1>
-      <div className="mt-5">
-        <input
-          className="border border-gray-400 p-1 rounded-l w-[10rem]"
-          type="text"
-          placeholder="Search"
-        />
-        <button className="relative top-1.5 border border-gray-400 p-1 rounded-r bg-gray-100 ">
-          <Search />
-        </button>
-      </div>
-      <div className="mt-5 w-[12rem]">
+      <div className="mt-5 ">
         <ul>
           <li
             className={`py-2 pl-2 mb-4 rounded ${
-              location.pathname === "/"
+              location.pathname === "/Home"
                 ? "border border-red-500 bg-red-500 text-white"
                 : "text-black"
             }`}
           >
-            <Link to="/" className="flex gap-2">
+            <Link to="/Home" className="flex gap-2">
               <Home />
               Home
             </Link>
@@ -48,7 +38,7 @@ const Sidebar = ({ user }) => {
           </li>
         </ul>
       </div>
-      <div className="h-[15rem] overflow-y-auto w-[13rem]">
+      <div className="h-[20rem] overflow-y-auto w-[13rem]">
         <div className="container mx-auto mt-2 ml-3 w-[11rem] h-[2.7rem]">
           {movieList.map((movieList, index) => (
             <div

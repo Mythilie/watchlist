@@ -4,12 +4,15 @@ import Body from "./Body";
 import { getSavedMovie } from "../Util/helper";
 import { addMovies } from "../Util/listSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
   const [userEmail, setUserEmail] = useState("");
   const [showMessage, setshowMessage] = useState("");
   const [isLogin, setIsLogin] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const DoSignIn = () => {
     let allAccounts = { users: [] };
     if (JSON.parse(localStorage.getItem("allAccounts"))) {
@@ -18,13 +21,19 @@ const UserLogin = () => {
     const isAvailable = allAccounts.users.filter(
       (user) => user.email === userEmail
     );
-    isAvailable[0]
-      ? setIsLogin(true)
-      : setshowMessage("User not created yet! Do, Sign Up.");
+    navigate("/Home");
+    isAvailable[0] ? setIsLogin(true) : (() => {
+      if (!userEmail.trim()) {
+        setshowMessage("User should not be empty.");
+      } else {
+        setshowMessage("User not created yet! Do, Sign Up.");
+        setUserEmail("");
+      }
+    })();
+     
     localStorage.setItem("loggedIn-User", userEmail);
     const movies = getSavedMovie(userEmail);
-    console.log(movies);
-    dispatch(addMovies(movies.savedMovies));
+    dispatch(addMovies(movies?.savedMovies || []));
   };
 
   const DoSignUp = () => {
@@ -34,10 +43,18 @@ const UserLogin = () => {
       if (JSON.parse(localStorage.getItem("allAccounts"))) {
         allAccounts = JSON.parse(localStorage.getItem("allAccounts"));
       }
+
+      const userExists = allAccounts.users.some(
+        (user) => userEmail.trim() === user.email.trim()
+      );
+      if (userExists) {
+        setshowMessage("The user already exists.");
+      } else {
+        setshowMessage("User created successfully.");
+      }
       let newUser = { email: userEmail, savedMovies: [] };
       allAccounts.users = [...allAccounts.users, newUser];
       localStorage.setItem("allAccounts", JSON.stringify(allAccounts));
-      setshowMessage("User Created Successfully.");
     }
   };
 

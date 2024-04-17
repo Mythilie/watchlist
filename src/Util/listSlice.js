@@ -13,12 +13,13 @@ const listSlice = createSlice({
       state.items = [...action.payload]
     },
     removeMovie: (state, action) => {
-      const indexToRemove = action.payload;
-      state.items.splice(indexToRemove, 1);
+      const Title = action.payload;
+      state.items = state.items.filter((item) => 
+      item.Title !== Title);
     },
-    // getAllMovieList: (state, action) => {
-    //   return state.items;
-    // },
+    getAllMovieList: (state) => {
+      return [...state.items];
+    },
   },
 });
 
