@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MOVIE_API } from "../Util/constant";
+import { MOVIE_API } from "../Util/Constant";
 import MovieCard from "./MovieCard";
 import { filterData, getSavedMovie } from "../Util/helper";
 import Shimmer from "./Shimmer";
