@@ -51,8 +51,6 @@ const UserLogin = () => {
       );
       if (userExists) {
         setshowMessage("The user already exists.");
-        setIsLogin(true);
-        navigate("/Home");
       } else {
         setshowMessage("User created successfully.");
       }

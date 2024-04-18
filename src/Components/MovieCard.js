@@ -27,7 +27,7 @@ const MovieCard = ({ info, isListAdd }) => {
     <div className="shadow-xl shadow-gray-250 w-40 mt-6 ">
       <Link to={"/movieDetails?v=" + imdbID}>
         <img
-          className="rounded-lg h-50 hover:shadow-lg hover:border-2 hover:border-blue-500"
+          className="rounded-lg h-50 hover:shadow-lg hover:border-4 hover:border-blue-500"
           alt="poster"
           src={Poster}
         />
@@ -51,11 +51,11 @@ const MovieCard = ({ info, isListAdd }) => {
         </ul>
         {!isListAddd ? (
           <button onClick={() => addMovieList(info)}>
-            <BookmarkPlus className="mt-8 mr-2 mb-2" />
+            <BookmarkPlus className="mt-8 mr-2 mb-2 hover:text-blue-700" />
           </button>
         ) : (
           <button onClick={() => removeMovieList(Title)}>
-            <BookmarkX className="mt-8 mr-2 mb-2" />
+            <BookmarkX className="mt-8 mr-2 mb-2 hover:text-red-700" />
           </button>
         )}
       </div>

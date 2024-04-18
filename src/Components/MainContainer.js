@@ -11,7 +11,7 @@ const MainContainer = () => {
           Browse movies, add them to watchlist and share them with your friends.
         </p>
         <p className="mt-4 font-sans flex">
-          Click the <BookmarkPlus className="mx-2" /> to add movie in your list.
+          Click the <BookmarkPlus className="mx-2 text-blue-700" /> to add movie in your list.
         </p>
       </div>
       <MovieContainer />

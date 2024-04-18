@@ -23,7 +23,6 @@ export const setSavedMovie = (email, movieDetails) => {
 };
 
 export const modifySavedMovie = (email, Title) => {
-  console.log(Title);
   try {
     let allAccounts = JSON.parse(localStorage.getItem("allAccounts"));
     allAccounts?.users?.map((user) => {

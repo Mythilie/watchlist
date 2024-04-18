@@ -17,12 +17,9 @@ const listSlice = createSlice({
       state.items = state.items.filter((item) => 
       item.Title !== Title);
     },
-    getAllMovieList: (state) => {
-      return [...state.items];
-    },
   },
 });
 
-export const { addMovie, removeMovie, getAllMovieList, addMovies } = listSlice.actions;
+export const { addMovie, removeMovie, addMovies } = listSlice.actions;
 
 export default listSlice.reducer;

@@ -24,10 +24,17 @@ const MovieContainer = () => {
 
   const SearchMovie = () => {
     const data = filterData(searchText, movies);
-    movies?.map((movie) => {
-      if (movie.Title !== searchText) setIsSearchNotFound(true);
-    });
+    const isTextFound = movies.some((movie) =>
+      movie.Title?.toLowerCase().includes(searchText.toLowerCase())
+    );
+    setIsSearchNotFound(!isTextFound);
     setFilteredMovie(data);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      SearchMovie();
+    }
   };
 
   if (!movies) return null;
@@ -44,6 +51,7 @@ const MovieContainer = () => {
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
+          onKeyPress={handleKeyPress}
         />
         <button
           className="border border-gray-400 p-1 rounded-r bg-red-600 text-white"
@@ -54,9 +62,11 @@ const MovieContainer = () => {
           Search
         </button>
       </div>
-      {isSearchNotFound && <div className="flex justify-center items-center relative top-40 font-bold text-2xl text-red-500">
-        <h1>No Movies Match Found.</h1>
-      </div>}
+      {isSearchNotFound && (
+        <div className="flex justify-center items-center relative top-40 font-bold text-2xl text-red-500">
+          <h1>No Movies Match Found.</h1>
+        </div>
+      )}
       <div className="flex flex-wrap gap-x-8 mb-10">
         {filteredMovie?.map((movie, index) => {
           const savedMovies = getSavedMovie(user);

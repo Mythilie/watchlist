@@ -12,7 +12,7 @@ const ListContainer = () => {
         <h1 className="text-2xl font-semibold">Welcome to Watchlist</h1>
         <p className="mt-4 font-sans">Movies which are added in your list.</p>
         <p className="mt-4 font-sans flex">
-          Click the <BookmarkX className="mx-2" /> to Remove movie from your
+          Click the <BookmarkX className="mx-2 text-red-700" /> to Remove movie from your
           list.
         </p>
       </div>
